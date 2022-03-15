@@ -20,7 +20,6 @@ def risp():
     city = request.args['sqcity']
     d = {'nome_squadra': [nome], 'data_fondazione': [date], 'città': [city]}
     df = pd.DataFrame(data=d, index=[1])
-    print(df)
     df.to_csv('squads_database.csv')
 
     return render_template('indexs1.html')
@@ -31,9 +30,17 @@ def risp1():
     nome = request.args['sqname']
     date = request.args['sqdate']
     city = request.args['sqcity']
-    for i in df:
-        df[df['nome_squadra'].str.contains(nome)]
-        #da completare
+    if nome == '':
+        if date == '':
+          
+          df1 = df[df['città'].str.contains(city)]
+        else:
+            df1 = df[df['data_fondazione'].str.contains(date)]
+    if nome != '':
+        df1 = df[df['nome_squadra'].str.contains(nome)]
+
+        
+    print(df1)
 
 
     return render_template('indexs1.html')
