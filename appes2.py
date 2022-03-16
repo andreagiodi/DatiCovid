@@ -21,8 +21,9 @@ def ricerca():
     indice = request.args['indice']
     radio = request.args['sel']
     df1 = pd.read_csv('squads_database.csv')
-    if indice not in df1[radio]:
+    if indice not in df1[radio].to_list():
         return render_template('error.html')
+    
     if radio == 'squadra':
         return df1[df1['squadra'].str.contains(indice)].to_html()
     if radio == 'anno':
