@@ -1,53 +1,35 @@
-from flask import Flask, render_template, request
+#si vuole realizzare un sito web per memorizzare le squadre di uno sport a scelta.
+#l'utente deve poter inserire il nome della squadra e la data di fondazione e la città.
+#deve inoltre poter effetuare delle ricerche inserendo uno dei valori delle colonne e ottenendo i dati presenti.
+
+from flask import Flask, render_template,request
 app = Flask(__name__)
-import pandas as pd 
-
-
-
-df = pd.read_csv('squads_database.csv')
-df1 = []
+import pandas as pd
 
 @app.route('/', methods=['GET'])
-def index():
-    
-
+def home():
     return render_template('indexs.html')
 
-@app.route('/risp', methods=['GET'])
-def risp():
-    nome = request.args['sqname']
-    date = request.args['sqdate']
-    city = request.args['sqcity']
-    d = {'nome_squadra': [nome], 'data_fondazione': [date], 'città': [city]}
-    df = pd.DataFrame(data=d, index=[1])
-    df.to_csv('squads_database.csv')
-
+@app.route('/inserisci', methods=['GET'])
+def inserisci():
     return render_template('indexs1.html')
 
-
-
-@app.route('/risp1', methods=['GET'])
-def risp1():
-    nome = request.args['sqname']
-    date = request.args['sqdate']
-    city = request.args['sqcity']
-    df = pd.read_csv('squads_database.csv')
-    if nome == '':
-        if date == '':
-          
-          df1 = df[df['città'].str.contains(city)]
-        else:
-            df1 = df[df['data_fondazione'].str.contains(date)]
-    if nome != '':
-        df1 = df[df['nome_squadra'].str.contains(nome)]
-    print(df1)
-
-
-    return render_template('indexs1.html', tables=[df1.to_html()], titles=[''])
-
-
-
-
+@app.route('/dati', methods=['GET'])
+def dati():
+    # inserimento dei dati nel file csv
+    # lettura dei dati dal form html 
+    squadra = request.args['Squadra']
+    anno = request.args['Anno']
+    citta = request.args['Citta']
+    # lettura dei dati daal file nel dataframe
+    df1 = pd.read_csv('squads_database.csv')
+    # aggiungiamo i nuovi dati nel dataframe 
+    nuovi_dati = {'squadra':squadra,'anno':anno,'citta':citta}
+    
+    df1 = df1.append(nuovi_dati,ignore_index=True)
+    # salviamo il dataframe sul file dati.csv
+    df1.to_csv('squads_database.csv', index=False)
+    return df1.to_html()
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=3246, debug=True)

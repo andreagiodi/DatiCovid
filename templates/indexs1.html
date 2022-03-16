@@ -1,18 +1,18 @@
-<form action="/risp1" method = "GET">
-    <p>Nome Squadra <input type = "text" name = "sqname" /></p>
-    <p>Data Di Fondazione <input type = "date" name = "sqdate" /></p>
-    <p>Città <input type = "text" name = "sqcity" /></p>
-    <p><input type = "submit" value = "Submit" /></p>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/dati" method = "GET">
+    <p>Squadra <input type = "text" name = "Squadra" /></p>
+    <p>Anno <input type = "text" name = "Anno" /></p>
+    <p>Citta <input type = "text" name = "Citta" /></p>
 
-<table>
-    
-    <h1>
-        <!--         -->
-        {%for i in tables%}
-        <h2>{{titles[loop.index]}}</h2>
-        {{i|safe}}
-        {%endfor%}
-    </h1>
-    
-</table>
+    <p><input type = "submit" value = "Submit" /></p> 
+    </form>
+</body>
+</html>
