@@ -53,7 +53,9 @@ def dati():
     
     
     df1.to_csv('squads_database.csv', index=False)
-    return df1.to_html()
+    rdf1 = df1.to_html()
+    #return df1.to_html()
+    return render_template('indexs2.html', tables=[rdf1], titles=[''])
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=3246, debug=True)
