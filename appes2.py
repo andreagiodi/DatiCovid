@@ -25,11 +25,20 @@ def risp():
     return render_template('indexs1.html')
 
 
+@app.route('/risp2', methods=['GET'])
+def risp2():
+    
+
+    return render_template('indexs1.html')
+
+
+
 @app.route('/risp1', methods=['GET'])
 def risp1():
     nome = request.args['sqname']
     date = request.args['sqdate']
     city = request.args['sqcity']
+    df = pd.read_csv('squads_database.csv')
     if nome == '':
         if date == '':
           
@@ -42,6 +51,10 @@ def risp1():
 
 
     return render_template('indexs1.html', tables=[df1.to_html()], titles=[''])
+
+
+
+
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=3246, debug=True)
