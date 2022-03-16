@@ -10,6 +10,27 @@ import pandas as pd
 def home():
     return render_template('indexs.html')
 
+
+@app.route('/formricerca', methods=['GET'])
+def formricerca():
+    return render_template('formricerca.html')
+
+
+@app.route('/ricerca', methods=['GET'])
+def ricerca():
+    indice = request.args['indice']
+    radio = request.args['sel']
+    df1 = pd.read_csv('squads_database.csv')
+    if radio == 'nome':
+        return df1[df1['squadra'].str.contains(indice)].to_html()
+    if radio == 'data':
+        return df1[df1['data'].str.contains(indice)].to_html()
+    if radio == 'citta':
+        return df1[df1['citta'].str.contains(indice)].to_html()
+
+    #return render_template('indexs2.html')
+
+
 @app.route('/inserisci', methods=['GET'])
 def inserisci():
     return render_template('indexs1.html')
