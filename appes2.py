@@ -16,18 +16,21 @@ def inserisci():
 
 @app.route('/dati', methods=['GET'])
 def dati():
-    # inserimento dei dati nel file csv
-    # lettura dei dati dal form html 
+    
+    
     squadra = request.args['Squadra']
     anno = request.args['Anno']
     citta = request.args['Citta']
-    # lettura dei dati daal file nel dataframe
+    
+    
     df1 = pd.read_csv('squads_database.csv')
-    # aggiungiamo i nuovi dati nel dataframe 
+    
+    
     nuovi_dati = {'squadra':squadra,'anno':anno,'citta':citta}
     
     df1 = df1.append(nuovi_dati,ignore_index=True)
-    # salviamo il dataframe sul file dati.csv
+    
+    
     df1.to_csv('squads_database.csv', index=False)
     return df1.to_html()
 
