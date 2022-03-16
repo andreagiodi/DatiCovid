@@ -27,9 +27,21 @@ def risp():
 
 @app.route('/risp2', methods=['GET'])
 def risp2():
-    
+    nome = request.args['sqname']
+    date = request.args['sqdate']
+    city = request.args['sqcity']
+    df = pd.read_csv('squads_database.csv')
+    if nome == '':
+        if date == '':
+          
+          df1 = df[df['città'].str.contains(city)]
+        else:
+            df1 = df[df['data_fondazione'].str.contains(date)]
+    if nome != '':
+        df1 = df[df['nome_squadra'].str.contains(nome)]
+    print(df1)
 
-    return render_template('indexs1.html')
+    return render_template('indexs2.html')
 
 
 
