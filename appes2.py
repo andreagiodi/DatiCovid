@@ -43,7 +43,7 @@ def risp1():
     print(df1)
 
 
-    return render_template('indexs1.html')
+    return render_template('indexs1.html', tables=[df1.to_html()], titles=[''])
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=3246, debug=True)
