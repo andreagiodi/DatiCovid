@@ -24,7 +24,7 @@ def ricerca():
     if radio == 'nome':
         return df1[df1['squadra'].str.contains(indice)].to_html()
     if radio == 'data':
-        return df1[df1['data'].str.contains(indice)].to_html()
+        return df1[df1['anno'].str.contains(indice)].to_html()
     if radio == 'citta':
         return df1[df1['citta'].str.contains(indice)].to_html()
 
