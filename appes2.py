@@ -38,8 +38,6 @@ def risp1():
             df1 = df[df['data_fondazione'].str.contains(date)]
     if nome != '':
         df1 = df[df['nome_squadra'].str.contains(nome)]
-
-        
     print(df1)
 
 
